@@ -1,0 +1,73 @@
+import java.util.Objects;
+import java.util.Scanner;
+
+//Function to verify all values of the array and return if is a valid or not position
+public class Main {
+    public static int search(String[][] array, String value, boolean turn){
+        for(int i = 0; i<3; i++){
+            for(int j = 0; j<3; j++){
+                    if(Objects.equals(array[i][j], value)){
+                        array[i][j] = turn ? "O" : "X";
+                        return 1;
+                    }
+            }
+        }
+        return 0;
+
+    }
+    public static void main(String[] args) {
+        //creating the table
+        String[][] juego = {{"1","2","3"},{"4","5","6"},{"7","8","9"}};
+        int choise, remaining = 9, value, mode;
+
+        //Turn and the variable to transform choice in a string
+        boolean turn = false;
+        String _choice;
+
+        //Scan to recieve values
+        Scanner scanner = new Scanner(System.in);
+
+        //Introduction
+        System.out.println("Welcome to the Tik Tak Toe!");
+        System.out.println("");
+        System.out.println("Make your choice:");
+        System.out.println("1. Press ʼ1ʼ to play with other person.");
+        System.out.println("2. Press ʼ2ʼ to play with computer.");
+        System.out.println("3. Press any key to quit the program.");
+        mode = scanner.nextInt();
+
+        if(mode != 1 && mode != 2){
+            System.exit(0);
+        }
+
+        do{
+            //Showing the table
+            for(int i = 0; i<3; i++){
+                System.out.println(juego[i][0] + " " + juego[i][1] + " " + juego[i][2]);
+            }
+
+            //Input value
+            System.out.println("Make your choise (1-9) : ");
+            choise = scanner.nextInt();
+
+            //If the choise is out of range
+            if(choise < 1 && choise > 9){
+                System.out.println("Enter a valid value (1-9).");
+            } else{
+                    //transforming the choice value to a string
+                    _choice = Integer.toString(choise);
+
+                    //If the position is valid
+                    if(search(juego, _choice, turn) == 1){
+                        remaining--;
+                        turn = !turn;
+
+                    //If the position is not valid
+                    } else{
+                        System.out.println("This position is invalid.");
+                    }
+            }
+        } while(remaining != 0);
+
+    }
+}
