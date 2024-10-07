@@ -1,0 +1,33 @@
+import java.util.*;
+import java.util.Random;
+public class Main {
+    public static void main(String[] args) {
+        //Declaring Java constructors
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        //Entering the data
+        System.out.print("Enter a integer number: ");
+        int value = scanner.nextInt();
+
+        //The generated numbers will be 1-(Range -1)
+        int range = 100;
+
+        //Creating the Stack structure
+        Stack <Integer> stack = new Stack<>();
+        Stack <Integer> reverse_stack = new Stack<>();
+
+        //Loop for that gives values to our array
+        for(int i = 0; i < value; i++){
+            stack.push(random.nextInt(range));
+        }
+
+        //Showing the values by the normal ord
+        System.out.println("Values of stack: "+ stack);
+        for(int i = 0; i < value; i++){
+            reverse_stack.push(stack.pop());
+        }
+
+        System.out.println("Values of reverse stack: "+ reverse_stack);
+    }
+}
